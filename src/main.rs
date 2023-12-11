@@ -13,10 +13,8 @@ fn main() {
         .add_systems(Update, keyboard_events)
         .run();
 }
-
 #[derive(Component, Deref, DerefMut)]
 struct AnimationTimer(Timer);
-
 fn setup(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
@@ -26,17 +24,13 @@ fn setup(
 
     let player =  Player::new();
     let texture_atlas_handle =
-        texture_atlases.add(
-            texture_atlas(asset_server, player.tile_set));
+        texture_atlases.add(texture_atlas(asset_server, player.sprite_sheet));
 
-    commands.spawn((
-        SpriteSheetBundle {
+    commands.spawn((AtlasImageBundle{
             texture_atlas: texture_atlas_handle,
-            sprite: TextureAtlasSprite::new(player.animation_layer.default[0]),
+            texture_atlas_image: UiTextureAtlasImage::default(),
             ..default()
-        },
-        player.animation_layer,
-        AnimationTimer(Timer::from_seconds(0.8, TimerMode::Repeating)),
+        },AnimationTimer(Timer::from_seconds(0.8, TimerMode::Repeating)),
     ));
 }
 
