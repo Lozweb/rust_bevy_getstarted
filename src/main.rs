@@ -1,6 +1,6 @@
 use bevy::prelude::*;
-use crate::entity::entity_manager::texture_atlas;
-use crate::entity::player::{keyboard_events, Player};
+use crate::entity::entity_manager::{SpriteSheet, texture_atlas};
+use crate::entity::player::{Player, player_movement};
 
 mod entity {
     pub mod entity_manager;
@@ -10,11 +10,9 @@ fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest())) // prevents blurry sprites
         .add_systems(Startup, setup)
-        .add_systems(Update, keyboard_events)
+        .add_systems(Update, player_movement)
         .run();
 }
-#[derive(Component, Deref, DerefMut)]
-struct AnimationTimer(Timer);
 fn setup(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
@@ -22,15 +20,12 @@ fn setup(
 ){
     commands.spawn(Camera2dBundle::default());
 
-    let player =  Player::new();
-    let texture_atlas_handle =
-        texture_atlases.add(texture_atlas(asset_server, player.sprite_sheet));
-
-    commands.spawn((AtlasImageBundle{
-            texture_atlas: texture_atlas_handle,
-            texture_atlas_image: UiTextureAtlasImage::default(),
-            ..default()
-        },AnimationTimer(Timer::from_seconds(0.8, TimerMode::Repeating)),
+    commands.spawn((SpriteSheetBundle {
+        texture_atlas: texture_atlases.add(texture_atlas(&asset_server, &SpriteSheet::player())),
+        sprite: TextureAtlasSprite::new(0),
+        transform: Transform::from_xyz(100.0,100.0,0.0),
+        ..default()
+    }, Player{}
     ));
 }
 

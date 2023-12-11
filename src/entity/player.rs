@@ -1,48 +1,46 @@
-use std::string::ToString;
-use bevy::math::Vec2;
-use bevy::prelude::{Component, DetectChanges, KeyCode, Query, Res, Time};
-use crate::entity::entity_manager::SpriteSheet;
+use bevy::prelude::{Component, KeyCode, Query, Res, Time, Transform, With};
 use bevy::input::{Input};
-use bevy::time::Timer;
-use bevy::ui::UiTextureAtlasImage;
+use bevy::sprite::TextureAtlasSprite;
 
 #[derive(Component)]
-pub struct Player {
-    pub (crate) sprite_sheet: SpriteSheet,
-}
+pub struct Player {}
 
-const FILE_PATH:&'static str = "entity/player_plane.png";
-const TILE_SIZE:Vec2 = Vec2::new(64., 64.,);
-const COL:usize = 4;
-const ROW:usize = 2;
-
-
-
-impl Player {
-    pub(crate) fn new() -> Player {
-        Player {
-            sprite_sheet: SpriteSheet { file_path: FILE_PATH.to_string(), tile_size: TILE_SIZE, col: COL, row: ROW}
-        }
-    }
-}
-
-pub fn keyboard_events(
+pub fn player_movement(
+    time: Res<Time>,
     keyboard_input: Res<Input<KeyCode>>,
-    mut query : Query<(&mut UiTextureAtlasImage)>
+    mut query : Query<(&mut Transform, &mut TextureAtlasSprite), With<Player>>
 ) {
-    if keyboard_input.pressed(KeyCode::Up){
-        for mut atlas_image in &mut query {
-            atlas_image.index = 1;
-        }
+
+    let mut x_direction = 0.0;
+    let mut y_direction = 0.0;
+
+    if keyboard_input.pressed(KeyCode::Left) {
+        x_direction -= 1.0;
     }
-    else if keyboard_input.pressed(KeyCode::Down){
-        for mut atlas_image in &mut query {
-            atlas_image.index = 3;
-        }
+    if keyboard_input.pressed(KeyCode::Right){
+        x_direction += 1.0;
     }
-    else  {
-        for mut atlas_image in &mut query {
-            atlas_image.index = 0;
-        }
+    if keyboard_input.pressed(KeyCode::Up) {
+        y_direction += 1.0;
+    }
+    if  keyboard_input.pressed(KeyCode::Down) {
+        y_direction -= 1.0;
+    }
+
+    for (mut transform, mut sprite) in &mut query {
+        if y_direction > 0.0 { sprite.index = 1; }
+        if y_direction < 0.0 { sprite.index = 3; }
+        if y_direction == 0.0 { sprite.index = 0; }
+
+        if transform.translation.x <= -610.0 { x_direction = 1.0; }
+        if transform.translation.x >= 610.0 { x_direction = -1.0; }
+        if transform.translation.y >= 340.0 { y_direction = -1.0; }
+        if transform.translation.y <= -340.0 { y_direction = 1.0; }
+
+        println!("x pos : {}", transform.translation.x);
+        println!("y pos : {}", transform.translation.y);
+
+        transform.translation.x += x_direction * 400.0 * time.delta_seconds();
+        transform.translation.y += y_direction * 400.0 * time.delta_seconds();
     }
 }
