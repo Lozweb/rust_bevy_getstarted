@@ -1,38 +1,42 @@
 use bevy::prelude::*;
+use crate::entity::entity_manager::texture_atlas;
+use crate::entity::player::{keyboard_events, Player};
 
+mod entity {
+    pub mod entity_manager;
+    pub mod player;
+}
 fn main() {
     App::new()
-        .add_plugins((DefaultPlugins, HelloPlugin))
-        .run()
+        .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest())) // prevents blurry sprites
+        .add_systems(Startup, setup)
+        .add_systems(Update, keyboard_events)
+        .run();
 }
 
-fn hello_world() {
-    println!("hello world");
+#[derive(Component, Deref, DerefMut)]
+struct AnimationTimer(Timer);
+
+fn setup(
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
+    mut texture_atlases: ResMut<Assets<TextureAtlas>>,
+){
+    commands.spawn(Camera2dBundle::default());
+
+    let player =  Player::new();
+    let texture_atlas_handle =
+        texture_atlases.add(
+            texture_atlas(asset_server, player.tile_set));
+
+    commands.spawn((
+        SpriteSheetBundle {
+            texture_atlas: texture_atlas_handle,
+            sprite: TextureAtlasSprite::new(player.animation_layer.default[0]),
+            ..default()
+        },
+        player.animation_layer,
+        AnimationTimer(Timer::from_seconds(0.8, TimerMode::Repeating)),
+    ));
 }
 
-#[derive(Component)]
-struct Person;
-
-#[derive(Component)]
-struct Name(String);
-
-fn add_people(mut commands: Commands){
-    commands.spawn((Person, Name("Durondil".to_string())));
-    commands.spawn((Person, Name("Sheshounet".to_string())));
-    commands.spawn((Person, Name("Ralph".to_string())));
-}
-
-fn greet_people(query: Query<&Name, With<Person>>) {
-    for name in &query {
-        println!("hello {}", name.0)
-    }
-}
-
-pub struct HelloPlugin;
-
-impl Plugin for HelloPlugin {
-    fn build(&self, app: &mut App){
-        app.add_systems(Startup, add_people)
-            .add_systems(Update, (hello_world, greet_people));
-    }
-}
