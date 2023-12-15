@@ -40,7 +40,7 @@ pub fn player_movement(
         println!("x pos : {}", transform.translation.x);
         println!("y pos : {}", transform.translation.y);
 
-        transform.translation.x += x_direction * 400.0 * time.delta_seconds();
-        transform.translation.y += y_direction * 400.0 * time.delta_seconds();
+        transform.translation.x += x_direction * 200.0 * time.delta_seconds();
+        transform.translation.y += y_direction * 200.0 * time.delta_seconds();
     }
 }
