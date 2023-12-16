@@ -37,8 +37,8 @@ pub fn player_movement(
         if transform.translation.y >= 340.0 { y_direction = -1.0; }
         if transform.translation.y <= -340.0 { y_direction = 1.0; }
 
-        println!("x pos : {}", transform.translation.x);
-        println!("y pos : {}", transform.translation.y);
+        //println!("x pos : {}", transform.translation.x);
+        //println!("y pos : {}", transform.translation.y);
 
         transform.translation.x += x_direction * 200.0 * time.delta_seconds();
         transform.translation.y += y_direction * 200.0 * time.delta_seconds();

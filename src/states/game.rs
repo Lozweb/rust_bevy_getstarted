@@ -28,7 +28,7 @@ fn game_setup(
     commands.spawn((SpriteSheetBundle {
         texture_atlas: texture_atlases.add(texture_atlas(&asset_server, &SpriteSheet::player())),
         sprite: TextureAtlasSprite::new(0),
-        transform: Transform::from_xyz(-605.0,0.0,0.0),
+        transform: Transform::from_xyz(-605.0,0.0,100.0),
         ..default()
     }, Player{}
     ));
