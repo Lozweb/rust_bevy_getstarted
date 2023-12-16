@@ -9,6 +9,8 @@ use crate::states::states::GameState;
 
 mod background{
     pub mod game_background;
+    pub mod nebuleuse;
+    pub mod star;
 }
 mod entity {
     pub mod entity_manager;
