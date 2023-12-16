@@ -8,14 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26253656-efb3-4efb-8bb7-ccc49b5cb477" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/background/game_background.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/player.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/player.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/states/game.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/states/game.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/states/states.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/states/states.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/game_background.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/game_background.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702657114906</updated>
       <workItem from="1702657116075" duration="4410000" />
-      <workItem from="1702715800304" duration="16280000" />
+      <workItem from="1702715800304" duration="16660000" />
     </task>
     <servers />
   </component>

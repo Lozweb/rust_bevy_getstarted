@@ -20,10 +20,13 @@ fn spawn_star(
     commands: &mut Commands,
     meshes: &mut ResMut<Assets<Mesh>>,
     materials: &mut ResMut<Assets<ColorMaterial>>,
+    respawn: bool
 ) {
-    let star = Star::new();
+    let mut star = Star::new();
 
-    // from respawn position.x = +650 not random
+    if respawn {
+        star.position = Vec3::new(650.,rand_float(-340., 340.), rand_float(0., 99.));
+    }
 
     commands.spawn((
         MaterialMesh2dBundle {
@@ -46,7 +49,7 @@ fn background_setup(
 ) {
 
     for _ in 0..100 {
-        spawn_star(&mut commands, &mut meshes, &mut materials)
+        spawn_star(&mut commands, &mut meshes, &mut materials, false)
     }
 }
 
@@ -63,7 +66,7 @@ fn background_animation(
 
         if transform.translation.x <= -650. {
             commands.entity(entity).despawn();
-            spawn_star(&mut commands, &mut meshes, &mut materials);
+            spawn_star(&mut commands, &mut meshes, &mut materials, true);
         }
     }
 }
@@ -94,6 +97,8 @@ static STAR_COLORS: &'static [Color] = &[
 ];
 
 impl Star {
+    // position LayerZ from size
+    // work with &self
     fn new() -> Star {
         Star{
             size: rand_float(0.5, 2.5),
