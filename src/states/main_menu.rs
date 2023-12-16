@@ -28,6 +28,9 @@ pub enum MenuButtonAction {
     Quit
 }
 pub struct  MenuPlugin;
+
+// TODO navigation keyboard
+
 impl Plugin for MenuPlugin {
     fn build(&self, app: &mut App) {
         app

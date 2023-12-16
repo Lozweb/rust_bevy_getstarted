@@ -1,3 +1,5 @@
+use bevy::core_pipeline::bloom::BloomSettings;
+use bevy::core_pipeline::tonemapping::Tonemapping;
 use bevy::prelude::*;
 use crate::states::game::GamePlugin;
 use crate::states::main_menu::{MenuPlugin};
@@ -21,7 +23,18 @@ fn main() {
         .add_plugins((MenuPlugin, GamePlugin))
         .run();
 }
+
 fn setup(mut commands: Commands, ){
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn((
+        Camera2dBundle {
+            camera: Camera{
+                hdr: true,
+                ..default()
+            },
+            tonemapping: Tonemapping::TonyMcMapface,
+            ..default()
+        },
+        BloomSettings::default(),
+    ));
 }
 
