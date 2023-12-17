@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 use crate::background::nebuleuse::{Nebuleuse, spawn_nebuleuse};
 use crate::background::star::{spawn_star, Star};
+use crate::entity::screen::CURRENT_MODE;
 use crate::states::states::{despawn_screen, GameState};
 pub struct GameBackgroundPlugin;
 
@@ -22,8 +23,9 @@ fn background_setup(
     mut asset_server: Res<AssetServer>,
     mut materials: ResMut<Assets<ColorMaterial>>
 ) {
+    let screen = unsafe {CURRENT_MODE.get_resolution()};
     spawn_nebuleuse(&mut commands, &mut asset_server, 0.);
-    spawn_nebuleuse(&mut commands, &mut asset_server, 1280.);
+    spawn_nebuleuse(&mut commands, &mut asset_server, screen.width);
 
     for _ in 0..100 {
         spawn_star(&mut commands, &mut meshes, &mut materials, false)
@@ -36,13 +38,13 @@ fn background_animation(
     mut asset_server: Res<AssetServer>,
     mut query: Query<(&mut Transform, Entity), With<Nebuleuse>>
 ){
-
+    let screen = unsafe {CURRENT_MODE.get_resolution()};
     for (mut transform, entity) in &mut query{
         transform.translation.x -= 1. * 20. * time.delta_seconds();
 
-        if transform.translation.x <= -1280. {
+        if transform.translation.x <= -screen.width {
             commands.entity(entity).despawn();
-            spawn_nebuleuse(&mut commands, &mut asset_server, 1280.);
+            spawn_nebuleuse(&mut commands, &mut asset_server, screen.width);
         }
     }
 }
@@ -54,11 +56,11 @@ fn stars_animation(
     mut materials: ResMut<Assets<ColorMaterial>>,
     mut stars : Query<(&mut Transform, &mut Star, Entity), With<Star>>
 ){
-
+    let screen = unsafe {CURRENT_MODE.get_resolution()};
     for (mut transform, star, entity) in &mut stars {
         transform.translation.x += -1. * ((star.speed * star.size)*2.) * time.delta_seconds();
 
-        if transform.translation.x <= -650. {
+        if transform.translation.x <= -(screen.width/2.) {
             commands.entity(entity).despawn();
             spawn_star(&mut commands, &mut meshes, &mut materials, true);
         }

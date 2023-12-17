@@ -1,6 +1,7 @@
 #![allow(clippy::type_complexity)]
 use bevy::app::AppExit;
 use bevy::prelude::*;
+use crate::entity::screen::{CURRENT_MODE, ResolutionMode, set_current_screen_resolution};
 use crate::states::menu_element;
 use crate::states::states::{despawn_screen, GameState};
 
@@ -8,6 +9,7 @@ use crate::states::states::{despawn_screen, GameState};
 pub enum MenuState {
     Main,
     Settings,
+    Resolution,
     #[default]
     Disabled,
 }
@@ -16,6 +18,8 @@ struct OnMainMenuScreen;
 #[derive(Component)]
 struct OnSettingsMenuScreen;
 #[derive(Component)]
+struct OnResolutionMenuScreen;
+#[derive(Component)]
 struct OnDisplaySettingsMenuScreen;
 #[derive(Component)]
 struct SelectedOption;
@@ -23,6 +27,10 @@ struct SelectedOption;
 pub enum MenuButtonAction {
     Play,
     Settings,
+    Resolution,
+    High,
+    Medium,
+    Low,
     BackToMainMenu,
     BackToSettings,
     Quit
@@ -43,6 +51,9 @@ impl Plugin for MenuPlugin {
 
             .add_systems(OnEnter(MenuState::Settings), settings_menu_setup)
             .add_systems(OnExit(MenuState::Settings), despawn_screen::<OnSettingsMenuScreen>)
+
+            .add_systems(OnEnter(MenuState::Resolution), resolution_menu_setup)
+            .add_systems(OnExit(MenuState::Resolution), despawn_screen::<OnResolutionMenuScreen>)
 
             .add_systems(Update, (menu_action, button_system).run_if(in_state(GameState::Menu)));
     }
@@ -95,7 +106,48 @@ fn settings_menu_setup(mut commands: Commands) {
 
                     parent.spawn(menu_element::menu_title("Settings"));
 
+                    parent.spawn(menu_element::menu_button_bundle(MenuButtonAction::Resolution))
+                        .with_children(|parent| {
+                            parent.spawn(menu_element::menu_button_text("Resolution"));
+                        });
+
                     parent.spawn(menu_element::menu_button_bundle(MenuButtonAction::BackToMainMenu))
+                        .with_children(|parent| {
+                            parent.spawn(menu_element::menu_button_text("Back"));
+                        });
+
+                });
+        });
+}
+fn resolution_menu_setup(mut commands: Commands){
+    commands.spawn((
+        menu_element::menu_main_container_bundle(), OnResolutionMenuScreen,
+    ))
+
+        .with_children(|parent|{
+
+            parent.spawn(menu_element::menu_container_bundle())
+
+                .with_children(|parent| {
+
+                    parent.spawn(menu_element::menu_title("Resolution"));
+
+                    parent.spawn(menu_element::menu_button_bundle(MenuButtonAction::High))
+                        .with_children(|parent| {
+                            parent.spawn(menu_element::menu_button_text("High:1920x1080"));
+                        });
+
+                    parent.spawn(menu_element::menu_button_bundle(MenuButtonAction::Medium))
+                        .with_children(|parent| {
+                            parent.spawn(menu_element::menu_button_text("Medium:1600x900"));
+                        });
+
+                    parent.spawn(menu_element::menu_button_bundle(MenuButtonAction::Low))
+                        .with_children(|parent| {
+                            parent.spawn(menu_element::menu_button_text("Low:1280x720"));
+                        });
+
+                    parent.spawn(menu_element::menu_button_bundle(MenuButtonAction::BackToSettings))
                         .with_children(|parent| {
                             parent.spawn(menu_element::menu_button_text("Back"));
                         });
@@ -126,6 +178,7 @@ fn menu_action(
     mut app_exit_events: EventWriter<AppExit>,
     mut menu_state: ResMut<NextState<MenuState>>,
     mut game_state: ResMut<NextState<GameState>>,
+    mut windows: Query<&mut Window>
 ) {
     for (interaction, menu_button_action) in &interaction_query {
         if *interaction == Interaction::Pressed {
@@ -136,6 +189,26 @@ fn menu_action(
                     menu_state.set(MenuState::Disabled);
                 }
                 MenuButtonAction::Settings => menu_state.set(MenuState::Settings),
+                MenuButtonAction::Resolution => menu_state.set(MenuState::Resolution),
+                MenuButtonAction::High => unsafe {
+                    //set resolution 1920x1080
+                    let screen = ResolutionMode::High.get_resolution();
+                    let mut window = windows.single_mut();
+                    window.resolution.set(screen.width, screen.height);
+                    set_current_screen_resolution(ResolutionMode::High);
+                },
+                MenuButtonAction::Medium => unsafe {
+                    let screen = ResolutionMode::Medium.get_resolution();
+                    let mut window = windows.single_mut();
+                    window.resolution.set(screen.width, screen.height);
+                    set_current_screen_resolution(ResolutionMode::Medium);
+                },
+                MenuButtonAction::Low => unsafe {
+                    let screen = ResolutionMode::Low.get_resolution();
+                    let mut window = windows.single_mut();
+                    window.resolution.set(screen.width, screen.height);
+                    set_current_screen_resolution(ResolutionMode::Low);
+                }
                 MenuButtonAction::BackToMainMenu => menu_state.set(MenuState::Main),
                 MenuButtonAction::BackToSettings => {
                     menu_state.set(MenuState::Settings);

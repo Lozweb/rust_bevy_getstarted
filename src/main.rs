@@ -3,6 +3,7 @@ use bevy::core_pipeline::tonemapping::Tonemapping;
 use bevy::prelude::*;
 use bevy::window::WindowTheme;
 use crate::background::game_background::GameBackgroundPlugin;
+use crate::entity::screen::get_current_screen_resolution;
 use crate::states::game::GamePlugin;
 use crate::states::main_menu::{MenuPlugin};
 use crate::states::states::GameState;
@@ -15,6 +16,7 @@ mod background{
 mod entity {
     pub mod entity_manager;
     pub mod player;
+    pub mod screen;
 }
 mod states {
     pub mod main_menu;
@@ -23,13 +25,14 @@ mod states {
     pub mod states;
 }
 fn main() {
+    let default_resolution = unsafe { get_current_screen_resolution() };
     App::new()
         .insert_resource(ClearColor(Color::BLACK))
         .add_plugins(
             DefaultPlugins
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        resolution: (1280., 720.).into(),
+                        resolution: (default_resolution.width, default_resolution.height).into(),
                         title: "Space shooter".to_string(),
                         resizable: false,
                         enabled_buttons: bevy::window::EnabledButtons {

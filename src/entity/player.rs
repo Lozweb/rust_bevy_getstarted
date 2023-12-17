@@ -1,6 +1,7 @@
 use bevy::prelude::{Component, KeyCode, Query, Res, Time, Transform, With};
 use bevy::input::{Input};
 use bevy::sprite::TextureAtlasSprite;
+use crate::entity::screen::CURRENT_MODE;
 
 #[derive(Component)]
 pub struct Player {}
@@ -10,7 +11,7 @@ pub fn player_movement(
     keyboard_input: Res<Input<KeyCode>>,
     mut query : Query<(&mut Transform, &mut TextureAtlasSprite), With<Player>>
 ) {
-
+    let screen = unsafe {CURRENT_MODE.get_resolution()};
     let mut x_direction = 0.0;
     let mut y_direction = 0.0;
 
@@ -32,10 +33,10 @@ pub fn player_movement(
         if y_direction < 0.0 { sprite.index = 3; }
         if y_direction == 0.0 { sprite.index = 0; }
 
-        if transform.translation.x <= -610.0 { x_direction = 1.0; }
-        if transform.translation.x >= 610.0 { x_direction = -1.0; }
-        if transform.translation.y >= 340.0 { y_direction = -1.0; }
-        if transform.translation.y <= -340.0 { y_direction = 1.0; }
+        if transform.translation.x <= -((screen.width/2.)-(30.*screen.scale)) { x_direction = 1.0; }
+        if transform.translation.x >= ((screen.width/2.)-(30.*screen.scale)) { x_direction = -1.0; }
+        if transform.translation.y >= ((screen.height/2.)-(20.*screen.scale)) { y_direction = -1.0; }
+        if transform.translation.y <= -((screen.height/2.)-(20.*screen.scale)) { y_direction = 1.0; }
 
         //println!("x pos : {}", transform.translation.x);
         //println!("y pos : {}", transform.translation.y);

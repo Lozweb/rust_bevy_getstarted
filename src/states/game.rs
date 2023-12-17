@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 use crate::entity::entity_manager::{SpriteSheet, texture_atlas};
 use crate::entity::player::{Player, player_movement};
+use crate::entity::screen::CURRENT_MODE;
 use crate::states::states::{despawn_screen, GameState};
 
 pub struct GamePlugin;
@@ -25,10 +26,11 @@ fn game_setup(
     asset_server: Res<AssetServer>,
     mut texture_atlases: ResMut<Assets<TextureAtlas>>,
 ){
+    let screen = unsafe {CURRENT_MODE.get_resolution()};
     commands.spawn((SpriteSheetBundle {
         texture_atlas: texture_atlases.add(texture_atlas(&asset_server, &SpriteSheet::player())),
         sprite: TextureAtlasSprite::new(0),
-        transform: Transform::from_xyz(-605.0,0.0,100.0),
+        transform: Transform::from_xyz(-((screen.width/2.)-(35.*screen.scale)),0.0,100.0).with_scale(Vec3::splat(screen.scale)),
         ..default()
     }, Player{}
     ));

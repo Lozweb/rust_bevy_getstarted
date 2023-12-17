@@ -6,7 +6,6 @@ use bevy::prelude::{Color, Commands, Component, default, Res, Sprite, SpriteBund
 pub struct Nebuleuse {
     pub(crate) texture: &'static str,
     pub(crate) sprite: Sprite,
-    pub(crate) position: Vec3
 }
 
 impl Nebuleuse {
@@ -17,7 +16,6 @@ impl Nebuleuse {
                 color: Color::rgba(1.0, 1.0, 1.0, 0.1),
                 ..default()
             },
-            position: Vec3::new(0., 0., 0.)
         }
     }
 }
@@ -31,7 +29,7 @@ pub fn spawn_nebuleuse(
     commands.spawn((
         SpriteBundle{
             sprite : nebuleuse.sprite,
-            transform: Transform::from_translation(Vec3::new(x_position, 0., 0.)).with_scale(Vec3::new(0.7, 0.7, 0.7)),
+            transform: Transform::from_translation(Vec3::new(x_position, 0., 0.)),
             texture: asset_server.load(nebuleuse.texture),
             ..default()
         }, Nebuleuse::new()

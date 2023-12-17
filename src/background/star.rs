@@ -3,6 +3,7 @@ use bevy::math::Vec3;
 use bevy::prelude::{Color, ColorMaterial, Commands, Component, default, Mesh, ResMut, shape, Transform};
 use bevy::sprite::MaterialMesh2dBundle;
 use rand::Rng;
+use crate::entity::screen::CURRENT_MODE;
 
 #[derive(Component)]
 pub struct Star {
@@ -31,12 +32,13 @@ static STAR_COLORS: &'static [Color] = &[
 
 impl Star {
     pub fn new() -> Star {
+        let screen = unsafe {CURRENT_MODE.get_resolution()};
         Star{
             size: Star::rand_float(0.5, 2.5),
             color: STAR_COLORS[Star::rand_u(0,6)],
             position: Vec3::new(
-                Star::rand_float(-640., 640.),
-                Star::rand_float(-340., 340.),
+                Star::rand_float(-screen.width, screen.width),
+                Star::rand_float(-screen.height, screen.height),
                 Star::rand_float(0., 99.)
             ),
             speed: 20.
@@ -61,9 +63,10 @@ pub fn spawn_star(
     respawn: bool
 ) {
     let mut star = Star::new();
+    let screen = unsafe {CURRENT_MODE.get_resolution()};
 
     if respawn {
-        star.position = Vec3::new(650., Star::rand_float(-340., 340.), Star::rand_float(0., 99.));
+        star.position = Vec3::new(screen.width, Star::rand_float(-screen.height, screen.height), Star::rand_float(0., 99.));
     }
 
     commands.spawn((
