@@ -4,6 +4,7 @@ use bevy::prelude::{Color, ColorMaterial, Commands, Component, default, Mesh, Re
 use bevy::sprite::MaterialMesh2dBundle;
 use rand::Rng;
 use crate::entity::screen::CURRENT_MODE;
+use crate::states::game::OnGameScreen;
 
 #[derive(Component)]
 pub struct Star {
@@ -80,6 +81,6 @@ pub fn spawn_star(
             color: star.color,
             position: star.position,
             speed: star.speed,
-        }
+        }, OnGameScreen
     ));
 }

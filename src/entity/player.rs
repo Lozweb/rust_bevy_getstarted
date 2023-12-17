@@ -1,7 +1,9 @@
-use bevy::prelude::{Component, KeyCode, Query, Res, Time, Transform, With};
+use bevy::prelude::{Component, KeyCode, NextState, Query, Res, ResMut, Time, Transform, With};
 use bevy::input::{Input};
 use bevy::sprite::TextureAtlasSprite;
 use crate::entity::screen::CURRENT_MODE;
+use crate::states::paused::MenuPausedState;
+use crate::states::states::GameState;
 
 #[derive(Component)]
 pub struct Player {}
@@ -9,6 +11,8 @@ pub struct Player {}
 pub fn player_movement(
     time: Res<Time>,
     keyboard_input: Res<Input<KeyCode>>,
+    mut game_state: ResMut<NextState<GameState>>,
+    mut menu_state: ResMut<NextState<MenuPausedState>>,
     mut query : Query<(&mut Transform, &mut TextureAtlasSprite), With<Player>>
 ) {
     let screen = unsafe {CURRENT_MODE.get_resolution()};
@@ -26,6 +30,10 @@ pub fn player_movement(
     }
     if  keyboard_input.pressed(KeyCode::Down) {
         y_direction -= 1.0;
+    }
+    if keyboard_input.pressed(KeyCode::Escape) {
+        game_state.set(GameState::Paused);
+        menu_state.set(MenuPausedState::Main);
     }
 
     for (mut transform, mut sprite) in &mut query {

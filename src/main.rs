@@ -2,14 +2,13 @@ use bevy::core_pipeline::bloom::BloomSettings;
 use bevy::core_pipeline::tonemapping::Tonemapping;
 use bevy::prelude::*;
 use bevy::window::WindowTheme;
-use crate::background::game_background::GameBackgroundPlugin;
 use crate::entity::screen::get_current_screen_resolution;
 use crate::states::game::GamePlugin;
 use crate::states::main_menu::{MenuPlugin};
-use crate::states::states::GameState;
+use crate::states::paused::PausedMenuPlugin;
+use crate::states::states::{GameInitState, GameState};
 
 mod background{
-    pub mod game_background;
     pub mod nebuleuse;
     pub mod star;
 }
@@ -23,6 +22,7 @@ mod states {
     pub mod menu_element;
     pub mod game;
     pub mod states;
+    pub mod paused;
 }
 fn main() {
     let default_resolution = unsafe { get_current_screen_resolution() };
@@ -48,8 +48,9 @@ fn main() {
                 .set(ImagePlugin::default_nearest())
         )
         .add_state::<GameState>()
+        .add_state::<GameInitState>()
         .add_systems(Startup, setup)
-        .add_plugins((MenuPlugin, GamePlugin, GameBackgroundPlugin))
+        .add_plugins((MenuPlugin, GamePlugin, PausedMenuPlugin))
         .run();
 }
 

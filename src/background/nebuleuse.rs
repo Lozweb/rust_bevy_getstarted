@@ -1,6 +1,7 @@
 use bevy::asset::AssetServer;
 use bevy::math::Vec3;
 use bevy::prelude::{Color, Commands, Component, default, Res, Sprite, SpriteBundle, Transform};
+use crate::states::game::OnGameScreen;
 
 #[derive(Component)]
 pub struct Nebuleuse {
@@ -32,6 +33,7 @@ pub fn spawn_nebuleuse(
             transform: Transform::from_translation(Vec3::new(x_position, 0., 0.)),
             texture: asset_server.load(nebuleuse.texture),
             ..default()
-        }, Nebuleuse::new()
+        }, Nebuleuse::new(),
+        OnGameScreen
     ));
 }

@@ -8,8 +8,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26253656-efb3-4efb-8bb7-ccc49b5cb477" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/states/paused.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background/game_background.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/game_background.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/game_background.rs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/nebuleuse.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/nebuleuse.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/star.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/star.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/player.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/player.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/states/game.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/states/game.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/states/main_menu.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/states/main_menu.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/states/menu_element.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/states/menu_element.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/states/states.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/states/states.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +96,7 @@
       <workItem from="1702657116075" duration="4410000" />
       <workItem from="1702715800304" duration="16690000" />
       <workItem from="1702745148074" duration="7837000" />
-      <workItem from="1702808123856" duration="7381000" />
+      <workItem from="1702808123856" duration="14534000" />
     </task>
     <servers />
   </component>

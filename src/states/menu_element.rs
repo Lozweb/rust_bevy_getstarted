@@ -1,6 +1,7 @@
-use bevy::prelude::{AlignItems, ButtonBundle, Color, default, FlexDirection, JustifyContent, NodeBundle, Style, TextBundle, UiRect, Val};
+use bevy::prelude::{AlignItems, BackgroundColor, Button, ButtonBundle, Changed, Color, Component, default, FlexDirection, Interaction, JustifyContent, NodeBundle, Query, Style, TextBundle, UiRect, Val, With};
 use bevy::text::TextStyle;
 use crate::states::main_menu::MenuButtonAction;
+use crate::states::paused::PausedMenuAction;
 
 pub const TEXT_COLOR: Color = Color::rgb(0.9, 0.9, 0.9);
 pub const NORMAL_BUTTON: Color = Color::rgb(0.15, 0.15, 0.15);
@@ -74,9 +75,38 @@ pub fn menu_button_bundle(action: MenuButtonAction) -> (ButtonBundle, MenuButton
     )
 }
 
+pub fn menu_button_paused_bundle(action: PausedMenuAction) -> (ButtonBundle, PausedMenuAction) {
+    (ButtonBundle  {
+        style: menu_button_style(),
+        background_color: NORMAL_BUTTON.into(),
+        ..default()
+    },
+     action
+    )
+}
+
 pub fn menu_button_text(text: &str)-> TextBundle{
     TextBundle::from_section(
         text,
         menu_button_text_style(),
     )
+}
+
+#[derive(Component)]
+pub struct SelectedOption;
+
+pub fn button_system(
+    mut interaction_query: Query<
+        (&Interaction, &mut BackgroundColor, Option<&SelectedOption>),
+        (Changed<Interaction>, With<Button>)
+    >
+) {
+    for (interaction, mut color, selected) in &mut interaction_query {
+        *color = match (*interaction, selected) {
+            (Interaction::Pressed, _) | (Interaction::None, Some(_)) => PRESSED_BUTTON.into(),
+            (Interaction::Hovered, Some(_)) => HOVERED_PRESSED_BUTTON.into(),
+            (Interaction::Hovered, None) => HOVERED_BUTTON.into(),
+            (Interaction::None, None) => NORMAL_BUTTON.into(),
+        }
+    }
 }
