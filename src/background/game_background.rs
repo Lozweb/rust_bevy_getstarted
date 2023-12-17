@@ -27,7 +27,9 @@ fn background_setup(
     spawn_nebuleuse(&mut commands, &mut asset_server, 0.);
     spawn_nebuleuse(&mut commands, &mut asset_server, screen.width);
 
-    for _ in 0..100 {
+    let max_stars = (200.*screen.scale) as i32;
+
+    for _ in 0..max_stars {
         spawn_star(&mut commands, &mut meshes, &mut materials, false)
     }
 }
