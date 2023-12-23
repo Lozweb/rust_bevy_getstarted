@@ -8,17 +8,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26253656-efb3-4efb-8bb7-ccc49b5cb477" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/states/paused.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/player_attack.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/player_capabilities.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/states/screen.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background/game_background.rs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background/nebuleuse.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/nebuleuse.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/background/star.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/star.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/entity_manager.rs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/player.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/player.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/screen.rs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/states/game.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/states/game.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/states/main_menu.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/states/main_menu.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/states/menu_element.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/states/menu_element.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/states/states.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/states/states.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +76,9 @@
       <recent name="$PROJECT_DIR$/assets/background" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/entity" />
+      <recent name="$PROJECT_DIR$/src/entity/player" />
+      <recent name="$PROJECT_DIR$/src/states" />
       <recent name="$PROJECT_DIR$/src/background" />
     </key>
   </component>

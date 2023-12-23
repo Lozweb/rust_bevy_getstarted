@@ -3,7 +3,7 @@ use bevy::math::Vec3;
 use bevy::prelude::{Color, ColorMaterial, Commands, Component, default, Mesh, ResMut, shape, Transform};
 use bevy::sprite::MaterialMesh2dBundle;
 use rand::Rng;
-use crate::entity::screen::CURRENT_MODE;
+use crate::states::screen::CURRENT_MODE;
 use crate::states::game::OnGameScreen;
 
 #[derive(Component)]
@@ -76,11 +76,7 @@ pub fn spawn_star(
             material: materials.add(ColorMaterial::from(Color::rgb(star.color.r(), star.color.g(), star.color.b()))),
             transform: Transform::from_translation(star.position),
             ..default()
-        }, Star {
-            size: star.size,
-            color: star.color,
-            position: star.position,
-            speed: star.speed,
-        }, OnGameScreen
+        }, star
+        , OnGameScreen
     ));
 }

@@ -1,6 +1,6 @@
 use bevy::app::AppExit;
 use bevy::prelude::*;
-use crate::entity::screen::{ResolutionMode, set_current_screen_resolution};
+use crate::states::screen::{ResolutionMode, set_current_screen_resolution};
 use crate::states::game::OnGameScreen;
 use crate::states::menu_element;
 use crate::states::menu_element::button_system;

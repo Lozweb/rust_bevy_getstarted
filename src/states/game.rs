@@ -1,9 +1,10 @@
 use bevy::prelude::*;
 use crate::background::nebuleuse::{Nebuleuse, spawn_nebuleuse};
-use crate::background::star::{spawn_star, Star};
-use crate::entity::entity_manager::{SpriteSheet, texture_atlas};
-use crate::entity::player::{Player, player_movement};
-use crate::entity::screen::CURRENT_MODE;
+use crate::background::star::{Star, spawn_star};
+use crate::entity::player_capabilities::player_movement;
+use crate::entity::player::spawn_player;
+use crate::entity::player_attack::Projectil;
+use crate::states::screen::CURRENT_MODE;
 use crate::states::states::{GameInitState, GameState};
 
 pub struct GamePlugin;
@@ -18,7 +19,7 @@ impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app
             .add_systems(OnEnter(GameState::Game), game_setup)
-            .add_systems(Update, (player_movement, background_animation, stars_animation).run_if(in_state(GameState::Game)));
+            .add_systems(Update, (player_movement, projectil_animation, background_animation, stars_animation).run_if(in_state(GameState::Game)));
     }
 }
 
@@ -26,7 +27,7 @@ fn game_setup(
     mut commands: Commands,
     mut game_init_sate: ResMut<NextState<GameInitState>>,
     current_state: Res<State<GameInitState>>,
-    mut texture_atlases: ResMut<Assets<TextureAtlas>>,
+    texture_atlases: ResMut<Assets<TextureAtlas>>,
     mut meshes: ResMut<Assets<Mesh>>,
     mut asset_server: Res<AssetServer>,
     mut materials: ResMut<Assets<ColorMaterial>>
@@ -34,14 +35,8 @@ fn game_setup(
     if current_state.get() == &GameInitState::Starting {
 
         let screen = unsafe {CURRENT_MODE.get_resolution()};
-        commands.spawn((SpriteSheetBundle {
-            texture_atlas: texture_atlases.add(texture_atlas(&asset_server, &SpriteSheet::player())),
-            sprite: TextureAtlasSprite::new(0),
-            transform: Transform::from_xyz(-((screen.width/2.)-(35.*screen.scale)),0.0,100.0).with_scale(Vec3::splat(screen.scale)),
-            ..default()
-        }, Player{},
-                        OnGameScreen
-        ));
+
+        spawn_player(&mut commands, texture_atlases, &mut asset_server, &screen);
 
         spawn_nebuleuse(&mut commands, &mut asset_server, 0.);
         spawn_nebuleuse(&mut commands, &mut asset_server, screen.width);
@@ -88,6 +83,23 @@ fn stars_animation(
         if transform.translation.x <= -(screen.width/2.) {
             commands.entity(entity).despawn();
             spawn_star(&mut commands, &mut meshes, &mut materials, true);
+        }
+    }
+}
+
+fn projectil_animation(
+    time: Res<Time>,
+    mut commands: Commands,
+    mut projectils : Query<(&mut Transform, &mut Projectil, Entity), With<Projectil>>
+) {
+    let screen = unsafe {CURRENT_MODE.get_resolution()};
+
+    for (mut transform, projectil, entity) in &mut projectils {
+
+        transform.translation.x += 1. + projectil.speed * time.delta_seconds();
+
+        if transform.translation.x >= screen.width {
+            commands.entity(entity).despawn();
         }
     }
 }
