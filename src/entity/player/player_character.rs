@@ -35,6 +35,7 @@ impl Player {
                     x: -((screen.width/2.)-(35.*screen.scale)),
                     y: 0.0,
                     z: 100.,
+                    speed: 200.0,
                     fire_speed: Timer::from_seconds(0.2, TimerMode::Repeating),
                     sprite_sheet: SpriteSheet::new(
                         "entity/player_plane.png".to_string(),

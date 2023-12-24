@@ -1,6 +1,5 @@
 use bevy::prelude::*;
 use crate::entity::player::*;
-use crate::entity::enemy::basic::Enemy;
 use crate::screen::CURRENT_MODE;
 use crate::states::{GameInitState, GameState};
 
@@ -27,13 +26,9 @@ fn game_setup(
     mut texture_atlases: ResMut<Assets<TextureAtlas>>,
     mut asset_server: Res<AssetServer>,
 ){
-    if current_state.get() == &GameInitState::Starting {
-
+    if current_state.get() == &GameInitState::PlayerLoading {
         let screen = unsafe {CURRENT_MODE.get_resolution()};
-
         player_character::Player::spawn(&mut commands, &mut texture_atlases, &mut asset_server, &screen);
-        Enemy::spawn(&mut commands, &mut texture_atlases, &mut asset_server, &screen);
-
-        game_init_sate.set(GameInitState::InProgress);
     }
+    game_init_sate.set(GameInitState::LevelLoading);
 }

@@ -68,10 +68,12 @@ fn main() {
         .add_systems(Startup, setup)
 
         .add_plugins((
+            plugin::level_manager::LevelPlugin,
             plugin::main_menu::MenuPlugin,
             plugin::game::GamePlugin,
             plugin::background::BackgroundPlugin,
-            plugin::paused::PausedMenuPlugin)
+            plugin::paused::PausedMenuPlugin,
+            )
         ).run();
 }
 

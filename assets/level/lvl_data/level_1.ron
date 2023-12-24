@@ -1,0 +1,16 @@
+Basic(
+    entity_component: EntityComponent(
+        x: (screen.width / 2.0) - 23.0,
+        y: 0.0,
+        z: 100.0,
+        speed: 200.0,
+        fire_speed: (1.0, Repeating),
+        sprite_sheet: SpriteSheet(
+            path: "entity/enemy1.png".to_string(),
+            size: (23.0, 27.0),
+            rows: 1,
+            columns: 1
+        )
+    ),
+    movement: StraightRL
+)

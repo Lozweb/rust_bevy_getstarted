@@ -51,8 +51,8 @@ pub fn player_movement(
         if transform.translation.y >= ((screen.height/2.)-(20.*screen.scale)) { y_direction = -1.0; }
         if transform.translation.y <= -((screen.height/2.)-(20.*screen.scale)) { y_direction = 1.0; }
 
-        transform.translation.x += x_direction * 200.0 * time.delta_seconds();
-        transform.translation.y += y_direction * 200.0 * time.delta_seconds();
+        transform.translation.x += x_direction * player.entity_component.speed * time.delta_seconds();
+        transform.translation.y += y_direction * player.entity_component.speed * time.delta_seconds();
 
         player.entity_component.x = transform.translation.x;
         player.entity_component.y = transform.translation.y;

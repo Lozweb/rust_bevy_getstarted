@@ -1,6 +1,5 @@
 use bevy::prelude::*;
 use bevy::sprite::MaterialMesh2dBundle;
-use crate::entity::player::player_attack;
 use crate::plugin::game::OnGameScreen;
 use crate::screen::CURRENT_MODE;
 
@@ -54,7 +53,7 @@ pub fn spwan_projectil(
 pub fn projectil_animation(
     time: Res<Time>,
     mut commands: Commands,
-    mut projectils : Query<(&mut Transform, &mut player_attack::Projectil, Entity), With<player_attack::Projectil>>
+    mut projectils : Query<(&mut Transform, &mut Projectil, Entity), With<Projectil>>
 ) {
     let screen = unsafe {CURRENT_MODE.get_resolution()};
 

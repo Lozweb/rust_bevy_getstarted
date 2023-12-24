@@ -1,8 +1,7 @@
 use bevy::app::AppExit;
 use bevy::prelude::*;
-use crate::entity::entity::despawn_screen;
 use crate::menu::menu_element;
-use crate::menu::menu_element::button_system;
+use crate::menu::menu_element::{button_system, despawn_screen};
 use crate::plugin::game::OnGameScreen;
 use crate::screen::{ResolutionMode, set_current_screen_resolution};
 use crate::states::{GameInitState, GameState};
@@ -174,7 +173,7 @@ fn menu_action(
 
                 MenuButtonAction::Play => {
                     game_state.set(GameState::Game);
-                    game_init_sate.set(GameInitState::Starting);
+                    game_init_sate.set(GameInitState::PlayerLoading);
                     menu_state.set(MenuState::Disabled);
                 },
 

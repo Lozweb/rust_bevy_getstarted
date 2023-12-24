@@ -1,4 +1,4 @@
-use bevy::prelude::{AlignItems, BackgroundColor, Button, ButtonBundle, Changed, Color, Component, default, FlexDirection, Interaction, JustifyContent, NodeBundle, Query, Style, TextBundle, UiRect, Val, With};
+use bevy::prelude::{AlignItems, BackgroundColor, Button, ButtonBundle, Changed, Color, Commands, Component, default, DespawnRecursiveExt, FlexDirection, Interaction, JustifyContent, NodeBundle, Query, Style, TextBundle, UiRect, Val, With};
 use bevy::text::TextStyle;
 use crate::plugin::main_menu::MenuButtonAction;
 use crate::plugin::paused::PausedMenuAction;
@@ -108,5 +108,11 @@ pub fn button_system(
             (Interaction::Hovered, None) => HOVERED_BUTTON.into(),
             (Interaction::None, None) => NORMAL_BUTTON.into(),
         }
+    }
+}
+
+pub fn despawn_screen<T: Component>(to_despawn: Query<bevy::prelude::Entity, With<T>>, mut commands: Commands) {
+    for entity in &to_despawn {
+        commands.entity(entity).despawn_recursive();
     }
 }

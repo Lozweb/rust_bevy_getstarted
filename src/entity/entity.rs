@@ -1,10 +1,9 @@
 use bevy::asset::{Assets, AssetServer};
-use bevy::hierarchy::DespawnRecursiveExt;
 use bevy::math::{Vec2, Vec3};
-use bevy::prelude::{Commands, Component, Query, Res, ResMut, SpriteSheetBundle, TextureAtlas, Timer, Transform, With};
+use bevy::prelude::{Commands, Component, Res, ResMut, SpriteSheetBundle, TextureAtlas, Timer, Transform};
 use bevy::sprite::TextureAtlasSprite;
 use bevy::utils::default;
-use crate::entity::enemy::basic::Enemy;
+use crate::entity::enemy::basic::Basic;
 use crate::entity::player::player_character::Player;
 use crate::plugin::game::OnGameScreen;
 use crate::screen::ScreenResolution;
@@ -14,8 +13,9 @@ pub struct EntityComponent {
     pub(crate) x: f32,
     pub(crate) y: f32,
     pub(crate) z: f32,
+    pub(crate) speed: f32,
     pub(crate) fire_speed: Timer,
-    pub(crate) sprite_sheet: SpriteSheet
+    pub(crate) sprite_sheet: SpriteSheet,
 }
 
 pub trait Entity {
@@ -97,7 +97,7 @@ pub fn spawn_enemy(
     asset_server: &mut Res<AssetServer>,
     screen: &ScreenResolution,
     texture_atlas_index: usize,
-    mut enemy: Enemy
+    mut enemy: Basic
 ) {
     commands.spawn( (
         sprite_sheet_bundle(texture_atlases, asset_server, texture_atlas_index, screen, &mut enemy),
@@ -105,10 +105,4 @@ pub fn spawn_enemy(
         OnGameScreen
     ));
 
-}
-
-pub fn despawn_screen<T: Component>(to_despawn: Query<bevy::prelude::Entity, With<T>>, mut commands: Commands) {
-    for entity in &to_despawn {
-        commands.entity(entity).despawn_recursive();
-    }
 }

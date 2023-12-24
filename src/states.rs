@@ -5,14 +5,14 @@ pub enum GameState {
     #[default]
     Menu,
     Game,
-    Paused
+    Paused,
 }
 
 #[derive(Clone, Copy, Default, Eq, PartialEq, Debug, Hash, States)]
 pub enum GameInitState {
     #[default]
     No,
-    Starting,
-    InProgress
+    PlayerLoading,
+    LevelLoading,
+    InGame,
 }
-

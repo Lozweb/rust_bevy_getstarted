@@ -320,6 +320,12 @@ dependencies = [
 
 [[package]]
 name = "base64"
+version = "0.12.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3441f0f7b02788e948e47f457ca01f1d7e6d92c693bc132c22b087d3141c03ff"
+
+[[package]]
+name = "base64"
 version = "0.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9e1b586273c5702936fe7b7d6896644d8be71e6314cfe09d3167c95f712589e8"
@@ -335,7 +341,9 @@ name = "bevy"
 version = "0.1.0"
 dependencies = [
  "bevy 0.12.1",
+ "bevy_ron",
  "rand",
+ "serde",
  "time",
 ]
 
@@ -865,6 +873,17 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.39",
+]
+
+[[package]]
+name = "bevy_ron"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1607bd10bdfa31d654e797e585c764c4f53513ade3d612c4fe2e8f703526c88c"
+dependencies = [
+ "base64 0.12.3",
+ "bitflags 1.3.2",
+ "serde",
 ]
 
 [[package]]
