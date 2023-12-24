@@ -4,8 +4,8 @@ use crate::background::star::{Star, spawn_star};
 use crate::entity::player_capabilities::player_movement;
 use crate::entity::player::spawn_player;
 use crate::entity::player_attack::Projectil;
-use crate::states::screen::CURRENT_MODE;
-use crate::states::states::{GameInitState, GameState};
+use crate::state::screen::CURRENT_MODE;
+use crate::state::states::{GameInitState, GameState};
 
 pub struct GamePlugin;
 
@@ -98,6 +98,7 @@ fn projectil_animation(
 
         transform.translation.x += 1. + projectil.speed * time.delta_seconds();
 
+        // despawn on right screen
         if transform.translation.x >= screen.width {
             commands.entity(entity).despawn();
         }

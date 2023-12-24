@@ -5,9 +5,9 @@ use bevy::math::Vec3;
 use bevy::sprite::TextureAtlasSprite;
 use crate::entity::player::Player;
 use crate::entity::player_attack::spwan_projectil;
-use crate::states::screen::CURRENT_MODE;
-use crate::states::paused::MenuPausedState;
-use crate::states::states::GameState;
+use crate::state::screen::CURRENT_MODE;
+use crate::state::paused::MenuPausedState;
+use crate::state::states::GameState;
 
 pub fn player_movement(
     time: Res<Time>,

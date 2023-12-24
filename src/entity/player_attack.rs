@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 use bevy::sprite::MaterialMesh2dBundle;
-use crate::states::game::OnGameScreen;
+use crate::state::game::OnGameScreen;
 
 #[derive(Component, Clone, Copy)]
 pub struct Projectil {

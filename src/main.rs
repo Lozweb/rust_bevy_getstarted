@@ -2,11 +2,11 @@ use bevy::core_pipeline::bloom::BloomSettings;
 use bevy::core_pipeline::tonemapping::Tonemapping;
 use bevy::prelude::*;
 use bevy::window::WindowTheme;
-use states::screen::get_current_screen_resolution;
-use crate::states::game::GamePlugin;
-use crate::states::main_menu::MenuPlugin;
-use crate::states::paused::PausedMenuPlugin;
-use crate::states::states::{GameInitState, GameState};
+use state::screen::get_current_screen_resolution;
+use crate::state::game::GamePlugin;
+use crate::state::main_menu::MenuPlugin;
+use crate::state::paused::PausedMenuPlugin;
+use crate::state::states::{GameInitState, GameState};
 
 mod background{
     pub mod nebuleuse;
@@ -19,7 +19,7 @@ mod entity {
 
 }
 
-mod states {
+mod state {
     pub mod main_menu;
     pub mod menu_element;
     pub mod game;

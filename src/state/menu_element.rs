@@ -1,7 +1,7 @@
 use bevy::prelude::{AlignItems, BackgroundColor, Button, ButtonBundle, Changed, Color, Component, default, FlexDirection, Interaction, JustifyContent, NodeBundle, Query, Style, TextBundle, UiRect, Val, With};
 use bevy::text::TextStyle;
-use crate::states::main_menu::MenuButtonAction;
-use crate::states::paused::PausedMenuAction;
+use crate::state::main_menu::MenuButtonAction;
+use crate::state::paused::PausedMenuAction;
 
 pub const TEXT_COLOR: Color = Color::rgb(0.9, 0.9, 0.9);
 pub const NORMAL_BUTTON: Color = Color::rgb(0.15, 0.15, 0.15);

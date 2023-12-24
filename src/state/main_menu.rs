@@ -1,10 +1,10 @@
 use bevy::app::AppExit;
 use bevy::prelude::*;
-use crate::states::screen::{ResolutionMode, set_current_screen_resolution};
-use crate::states::game::OnGameScreen;
-use crate::states::menu_element;
-use crate::states::menu_element::button_system;
-use crate::states::states::{despawn_screen, GameInitState, GameState};
+use crate::state::screen::{ResolutionMode, set_current_screen_resolution};
+use crate::state::game::OnGameScreen;
+use crate::state::menu_element;
+use crate::state::menu_element::button_system;
+use crate::state::states::{despawn_screen, GameInitState, GameState};
 
 #[derive(Clone, Copy, Default, Eq, PartialEq, Debug, Hash, States)]
 pub enum MenuState {

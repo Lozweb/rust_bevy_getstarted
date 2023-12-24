@@ -8,8 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26253656-efb3-4efb-8bb7-ccc49b5cb477" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/level/level_manager.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/level/lvl_data/level_1.ron" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/nebuleuse.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/nebuleuse.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/background/star.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/star.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/player.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/player.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/player_attack.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/player_attack.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/player_capabilities.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/player_capabilities.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/states/game.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/game.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/states/main_menu.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/main_menu.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/states/menu_element.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/menu_element.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/states/paused.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/paused.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/states/screen.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/screen.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/states/states.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/states.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,22 +59,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/julien/workspace/rust/space_shooter/assets/background&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Cargo.Run.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/julien/workspace/rust/space_shooter/assets/background",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/assets/background" />
@@ -75,6 +89,25 @@
   </component>
   <component name="RsExternalLinterProjectSettings">
     <option name="runOnTheFly" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Run" type="CargoCommandRunConfiguration" factoryName="Cargo Command" nameIsGenerated="true">
+      <option name="command" value="run" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <envs />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="RustProjectSettings">
     <option name="toolchainHomeDirectory" value="/usr/bin" />
@@ -91,6 +124,7 @@
       <workItem from="1702715800304" duration="16690000" />
       <workItem from="1702745148074" duration="7837000" />
       <workItem from="1702808123856" duration="14534000" />
+      <workItem from="1703407301274" duration="1068000" />
     </task>
     <servers />
   </component>
