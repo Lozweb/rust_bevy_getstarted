@@ -2,8 +2,9 @@ use bevy::prelude::*;
 use crate::background::nebuleuse::{Nebuleuse, spawn_nebuleuse};
 use crate::background::star::{Star, spawn_star};
 use crate::entity::player_capabilities::player_movement;
-use crate::entity::player::spawn;
+use crate::entity::player::*;
 use crate::entity::player_attack::Projectil;
+use crate::entity::enemy::basic::Enemy;
 use crate::state::screen::CURRENT_MODE;
 use crate::state::states::{GameInitState, GameState};
 
@@ -24,7 +25,7 @@ fn game_setup(
     mut commands: Commands,
     mut game_init_sate: ResMut<NextState<GameInitState>>,
     current_state: Res<State<GameInitState>>,
-    texture_atlases: ResMut<Assets<TextureAtlas>>,
+    mut texture_atlases: ResMut<Assets<TextureAtlas>>,
     mut meshes: ResMut<Assets<Mesh>>,
     mut asset_server: Res<AssetServer>,
     mut materials: ResMut<Assets<ColorMaterial>>
@@ -33,7 +34,8 @@ fn game_setup(
 
         let screen = unsafe {CURRENT_MODE.get_resolution()};
 
-        spawn(&mut commands, texture_atlases, &mut asset_server, &screen);
+        Player::spawn(&mut commands, &mut texture_atlases, &mut asset_server, &screen);
+        Enemy::spawn(&mut commands, &mut texture_atlases, &mut asset_server, &screen);
 
         spawn_nebuleuse(&mut commands, &mut asset_server, 0.);
         spawn_nebuleuse(&mut commands, &mut asset_server, screen.width);

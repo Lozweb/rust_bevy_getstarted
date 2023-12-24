@@ -20,10 +20,8 @@ mod entity {
     pub mod player;
     pub mod player_attack;
     pub mod player_capabilities;
-
     pub mod entity;
-
-    mod enemy {
+    pub mod enemy {
         pub mod basic;
     }
 }

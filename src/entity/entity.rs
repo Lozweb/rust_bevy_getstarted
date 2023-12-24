@@ -3,6 +3,7 @@ use bevy::math::{Vec2, Vec3};
 use bevy::prelude::{Commands, Component, Res, ResMut, SpriteSheetBundle, TextureAtlas, Timer, Transform};
 use bevy::sprite::TextureAtlasSprite;
 use bevy::utils::default;
+use crate::entity::enemy::basic::Enemy;
 use crate::entity::player::Player;
 use crate::state::game::OnGameScreen;
 use crate::state::screen::ScreenResolution;
@@ -18,16 +19,6 @@ pub struct EntityComponent {
 
 pub trait Entity {
     fn component(&mut self) -> EntityComponent;
-
-    fn fire_speed(&mut self) -> Timer {self.component().fire_speed}
-
-    fn set_position(&mut self, x:f32, y:f32)-> () {
-        self.component().x = x;
-        self.component().y = y;
-    }
-    fn get_position(&mut self) -> (f32, f32) {
-        (self.component().x, self.component().y)
-    }
 
 }
 
@@ -65,25 +56,51 @@ pub fn texture(
     )
 }
 
-pub fn spawn_player(
-    commands: &mut Commands,
-    mut texture_atlases: ResMut<Assets<TextureAtlas>>,
+fn sprite_sheet_bundle<T>(
+    mut texture_atlases: &mut ResMut<Assets<TextureAtlas>>,
     asset_server: &mut Res<AssetServer>,
-    screen: &ScreenResolution,
     texture_atlas_index: usize,
-    mut entity: Player
-) {
+    screen: &ScreenResolution,
+    entity: &mut T
+) -> SpriteSheetBundle where T: Entity {
 
     let entity_component = entity.component();
 
+    SpriteSheetBundle {
+        texture_atlas: texture_atlases.add(texture(&asset_server, &entity_component.sprite_sheet)),
+        sprite: TextureAtlasSprite::new(texture_atlas_index),
+        transform: Transform::from_xyz(entity_component.x, entity_component.y, entity_component.z).with_scale(Vec3::splat(screen.scale)),
+        ..default()
+    }
+}
+
+pub fn spawn_player(
+    commands: &mut Commands,
+    texture_atlases: &mut ResMut<Assets<TextureAtlas>>,
+    asset_server: &mut Res<AssetServer>,
+    screen: &ScreenResolution,
+    texture_atlas_index: usize,
+    mut player: Player
+) {
     commands.spawn( (
-        SpriteSheetBundle {
-            texture_atlas: texture_atlases.add(texture(&asset_server, &entity_component.sprite_sheet)),
-            sprite: TextureAtlasSprite::new(texture_atlas_index),
-            transform: Transform::from_xyz(entity_component.x, entity_component.y, entity_component.z).with_scale(Vec3::splat(screen.scale)),
-            ..default()
-        },
-        entity,
+        sprite_sheet_bundle(texture_atlases, asset_server, texture_atlas_index, screen, &mut player),
+        player,
+        OnGameScreen
+    ));
+
+}
+
+pub fn spawn_enemy(
+    commands: &mut Commands,
+    texture_atlases: &mut ResMut<Assets<TextureAtlas>>,
+    asset_server: &mut Res<AssetServer>,
+    screen: &ScreenResolution,
+    texture_atlas_index: usize,
+    mut enemy: Enemy
+) {
+    commands.spawn( (
+        sprite_sheet_bundle(texture_atlases, asset_server, texture_atlas_index, screen, &mut enemy),
+        enemy,
         OnGameScreen
     ));
 
