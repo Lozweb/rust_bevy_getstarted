@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 use crate::entity::entity::{EntityComponent, Entity, spawn_enemy, SpriteSheet};
-use crate::state::screen::ScreenResolution;
+use crate::screen::ScreenResolution;
 
 
 #[derive(Component)]
@@ -43,4 +43,11 @@ impl Enemy {
             }
         )
     }
+}
+
+pub fn enemy_animate(
+    time: Res<Time>,
+
+) {
+
 }

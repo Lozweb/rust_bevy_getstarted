@@ -1,8 +1,8 @@
 use bevy::prelude::*;
 use crate::background::nebuleuse::{Nebuleuse, spawn_nebuleuse};
 use crate::background::star::{spawn_star, Star};
-use crate::state::screen::CURRENT_MODE;
-use crate::state::states::{GameState};
+use crate::screen::CURRENT_MODE;
+use crate::states::{GameState};
 
 pub struct BackgroundPlugin;
 

@@ -3,8 +3,8 @@ use bevy::math::Vec3;
 use bevy::prelude::{Color, ColorMaterial, Commands, Component, default, Mesh, ResMut, shape, Transform};
 use bevy::sprite::MaterialMesh2dBundle;
 use rand::Rng;
-use crate::state::screen::CURRENT_MODE;
-use crate::state::game::OnGameScreen;
+use crate::plugin::game::OnGameScreen;
+use crate::screen::CURRENT_MODE;
 
 #[derive(Component)]
 pub struct Star {

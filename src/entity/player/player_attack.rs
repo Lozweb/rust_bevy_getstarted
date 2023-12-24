@@ -1,6 +1,8 @@
 use bevy::prelude::*;
 use bevy::sprite::MaterialMesh2dBundle;
-use crate::state::game::OnGameScreen;
+use crate::entity::player::player_attack;
+use crate::plugin::game::OnGameScreen;
+use crate::screen::CURRENT_MODE;
 
 #[derive(Component, Clone, Copy)]
 pub struct Projectil {
@@ -47,4 +49,22 @@ pub fn spwan_projectil(
         projectil,
         OnGameScreen
     ));
+}
+
+pub fn projectil_animation(
+    time: Res<Time>,
+    mut commands: Commands,
+    mut projectils : Query<(&mut Transform, &mut player_attack::Projectil, Entity), With<player_attack::Projectil>>
+) {
+    let screen = unsafe {CURRENT_MODE.get_resolution()};
+
+    for (mut transform, projectil, entity) in &mut projectils {
+
+        transform.translation.x += 1. + projectil.speed * time.delta_seconds();
+
+        // despawn on right screen
+        if transform.translation.x >= screen.width {
+            commands.entity(entity).despawn();
+        }
+    }
 }

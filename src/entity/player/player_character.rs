@@ -1,9 +1,9 @@
 use bevy::asset::{Assets, AssetServer};
-use bevy::math::{Vec2};
+use bevy::math::Vec2;
 use bevy::prelude::{Commands, Component, Res, ResMut, TextureAtlas};
 use bevy::time::{Timer, TimerMode};
 use crate::entity::entity::{Entity, EntityComponent, spawn_player, SpriteSheet};
-use crate::state::screen::{ScreenResolution};
+use crate::screen::ScreenResolution;
 
 #[derive(Component)]
 pub struct Player {

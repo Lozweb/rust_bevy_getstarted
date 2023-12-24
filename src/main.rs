@@ -2,45 +2,45 @@ use bevy::core_pipeline::bloom::BloomSettings;
 use bevy::core_pipeline::tonemapping::Tonemapping;
 use bevy::prelude::*;
 use bevy::window::WindowTheme;
-use state::screen::get_current_screen_resolution;
-use crate::background::background::BackgroundPlugin;
-use crate::state::game::GamePlugin;
-use crate::state::main_menu::MenuPlugin;
-use crate::state::paused::PausedMenuPlugin;
-use crate::state::states::{GameInitState, GameState};
+use screen::get_current_screen_resolution;
 
-mod level {
-    pub mod level_manager;
+pub mod screen;
+pub mod states;
+
+pub mod menu {
+    pub mod menu_element;
 }
-
 mod background{
     pub mod nebuleuse;
     pub mod star;
-    pub mod background;
 }
 mod entity {
-    pub mod player;
-    pub mod player_attack;
-    pub mod player_capabilities;
     pub mod entity;
     pub mod enemy {
         pub mod basic;
     }
+    pub mod player {
+        pub mod player_character;
+        pub mod player_attack;
+        pub mod player_capabilities;
+    }
 }
 
-mod state {
-    pub mod main_menu;
-    pub mod menu_element;
+mod plugin {
     pub mod game;
-    pub mod states;
+    pub mod main_menu;
     pub mod paused;
-    pub mod screen;
+    pub mod background;
+    pub mod level_manager;
 }
 
 fn main() {
     let default_resolution = unsafe { get_current_screen_resolution() };
+
     App::new()
+
         .insert_resource(ClearColor(Color::BLACK))
+
         .add_plugins(
             DefaultPlugins
                 .set(WindowPlugin {
@@ -60,11 +60,19 @@ fn main() {
                 })
                 .set(ImagePlugin::default_nearest())
         )
-        .add_state::<GameState>()
-        .add_state::<GameInitState>()
+
+        .add_state::<states::GameState>()
+
+        .add_state::<states::GameInitState>()
+
         .add_systems(Startup, setup)
-        .add_plugins((MenuPlugin, GamePlugin, BackgroundPlugin, PausedMenuPlugin))
-        .run();
+
+        .add_plugins((
+            plugin::main_menu::MenuPlugin,
+            plugin::game::GamePlugin,
+            plugin::background::BackgroundPlugin,
+            plugin::paused::PausedMenuPlugin)
+        ).run();
 }
 
 fn setup(mut commands: Commands, ){

@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use crate::state::states::GameState;
+use crate::states::GameState;
 
 
 pub struct LevelPlugin;

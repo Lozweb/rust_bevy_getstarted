@@ -1,7 +1,7 @@
 use bevy::asset::AssetServer;
 use bevy::math::Vec3;
 use bevy::prelude::{Color, Commands, Component, default, Res, Sprite, SpriteBundle, Transform};
-use crate::state::game::OnGameScreen;
+use crate::plugin::game::OnGameScreen;
 
 #[derive(Component)]
 pub struct Nebuleuse {

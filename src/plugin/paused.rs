@@ -1,7 +1,8 @@
 use bevy::prelude::*;
-use crate::state::menu_element;
-use crate::state::menu_element::button_system;
-use crate::state::states::{despawn_screen, GameInitState, GameState};
+use crate::entity::entity::despawn_screen;
+use crate::menu::menu_element;
+use crate::menu::menu_element::button_system;
+use crate::states::{GameInitState, GameState};
 #[derive(Clone, Copy, Default, Eq, PartialEq, Debug, Hash, States)]
 pub enum MenuPausedState {
     Main,

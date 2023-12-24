@@ -3,11 +3,11 @@ use bevy::prelude::{ColorMaterial, Commands, KeyCode, Mesh, NextState, Query, Re
 use bevy::input::{Input};
 use bevy::math::Vec3;
 use bevy::sprite::TextureAtlasSprite;
-use crate::entity::player::Player;
-use crate::entity::player_attack::spwan_projectil;
-use crate::state::screen::CURRENT_MODE;
-use crate::state::paused::MenuPausedState;
-use crate::state::states::GameState;
+use crate::entity::player::player_character::Player;
+use crate::entity::player::player_attack::spwan_projectil;
+use crate::plugin::paused::MenuPausedState;
+use crate::screen::CURRENT_MODE;
+use crate::states::GameState;
 
 pub fn player_movement(
     time: Res<Time>,
