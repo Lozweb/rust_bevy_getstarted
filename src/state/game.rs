@@ -2,7 +2,7 @@ use bevy::prelude::*;
 use crate::background::nebuleuse::{Nebuleuse, spawn_nebuleuse};
 use crate::background::star::{Star, spawn_star};
 use crate::entity::player_capabilities::player_movement;
-use crate::entity::player::spawn_player;
+use crate::entity::player::spawn;
 use crate::entity::player_attack::Projectil;
 use crate::state::screen::CURRENT_MODE;
 use crate::state::states::{GameInitState, GameState};
@@ -11,9 +11,6 @@ pub struct GamePlugin;
 
 #[derive(Component)]
 pub struct OnGameScreen;
-
-#[derive(Resource, Deref, DerefMut)]
-struct GameTimer(Timer);
 
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
@@ -36,7 +33,7 @@ fn game_setup(
 
         let screen = unsafe {CURRENT_MODE.get_resolution()};
 
-        spawn_player(&mut commands, texture_atlases, &mut asset_server, &screen);
+        spawn(&mut commands, texture_atlases, &mut asset_server, &screen);
 
         spawn_nebuleuse(&mut commands, &mut asset_server, 0.);
         spawn_nebuleuse(&mut commands, &mut asset_server, screen.width);

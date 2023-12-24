@@ -1,80 +1,61 @@
 use bevy::asset::{Assets, AssetServer};
-use bevy::math::{Vec2, Vec3};
-use bevy::prelude::{Commands, Component, default, Res, ResMut, SpriteSheetBundle, TextureAtlas, TextureAtlasSprite, Transform};
+use bevy::math::{Vec2};
+use bevy::prelude::{Commands, Component, Res, ResMut, TextureAtlas};
 use bevy::time::{Timer, TimerMode};
-use crate::state::game::OnGameScreen;
+use crate::entity::entity::{Entity, EntityComponent, spawn_player, SpriteSheet};
 use crate::state::screen::{ScreenResolution};
 
 #[derive(Component)]
 pub struct Player {
-    pub(crate) x: f32,
-    pub(crate) y: f32,
-    pub(crate) fire_speed: Timer
+    pub(crate) entity_component: EntityComponent,
 }
 
-impl Player {
-    pub fn set_position(&mut self, x:f32, y:f32){
-        self.x = x;
-        self.y = y;
+impl Entity for Player {
+    fn component(&mut self) -> EntityComponent {
+        self.entity_component.clone()
     }
-}
 
-pub struct SpriteSheet {
-    pub(crate) file_path: String,
-    pub(crate) tile_size: Vec2,
-    pub(crate) col: usize,
-    pub(crate) row: usize
-}
-
-const PLAYER_FILE:&'static str = "entity/player_plane.png";
-const TILE_SIZE:Vec2 = Vec2::new(64., 64.,);
-const COL:usize = 4;
-const ROW:usize = 2;
-
-impl  SpriteSheet {
-    pub(crate) fn sprite_sheet() -> SpriteSheet {
-        SpriteSheet {
-            file_path: PLAYER_FILE.to_string(),
-            tile_size: TILE_SIZE,
-            col: COL,
-            row: ROW
-        }
+    fn fire_speed(&mut self) -> Timer {
+        self.entity_component.fire_speed.clone()
     }
+
+    fn set_position(&mut self, x: f32, y: f32) {
+        self.entity_component.x = x;
+        self.entity_component.y = y;
+    }
+
+    fn get_position(&mut self) -> (f32, f32) {
+        (self.entity_component.x, self.entity_component.y)
+    }
+
 }
 
-pub fn player_texture(
-    asset_server: &Res<AssetServer>,
-    sprite_sheet: &SpriteSheet
-) ->  TextureAtlas {
-
-    TextureAtlas::from_grid(
-        asset_server.load(&sprite_sheet.file_path),
-        sprite_sheet.tile_size,
-        sprite_sheet.col,
-        sprite_sheet.row,
-        None,
-        None
-    )
-}
-
-pub fn spawn_player(
+pub fn spawn(
     commands: &mut Commands,
-    mut texture_atlases: ResMut<Assets<TextureAtlas>>,
+    texture_atlases: ResMut<Assets<TextureAtlas>>,
     asset_server: &mut Res<AssetServer>,
     screen: &ScreenResolution
 ) {
-    commands.spawn((
-        SpriteSheetBundle {
-            texture_atlas: texture_atlases.add(player_texture(&asset_server, &SpriteSheet::sprite_sheet())),
-            sprite: TextureAtlasSprite::new(0),
-            transform: Transform::from_xyz(-((screen.width/2.)-(35.*screen.scale)),0.0,100.0).with_scale(Vec3::splat(screen.scale)),
-            ..default()
-        },
-        Player{
-            x: -((screen.width/2.)-(35.*screen.scale)),
-            y: 0.0,
-            fire_speed: Timer::from_seconds(0.2, TimerMode::Repeating)
-        },
-        OnGameScreen
-    ));
+    spawn_player(
+        commands,
+        texture_atlases,
+        asset_server,
+        screen,
+        0,
+        Player {
+            entity_component: EntityComponent {
+                x: -((screen.width/2.)-(35.*screen.scale)),
+                y: 0.0,
+                z: 100.,
+                fire_speed: Timer::from_seconds(0.2, TimerMode::Repeating),
+                sprite_sheet: SpriteSheet::new(
+                    "entity/player_plane.png".to_string(),
+                    Vec2::new(64., 64.,),
+                    4,
+                    2
+                )
+            }
+        }
+
+     );
 }

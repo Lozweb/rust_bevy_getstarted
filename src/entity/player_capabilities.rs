@@ -41,6 +41,7 @@ pub fn player_movement(
     }
 
     for (mut transform, mut sprite, mut player) in &mut query {
+
         if y_direction > 0.0 { sprite.index = 1; }
         if y_direction < 0.0 { sprite.index = 3; }
         if y_direction == 0.0 { sprite.index = 0; }
@@ -52,17 +53,19 @@ pub fn player_movement(
 
         transform.translation.x += x_direction * 200.0 * time.delta_seconds();
         transform.translation.y += y_direction * 200.0 * time.delta_seconds();
-        player.set_position(transform.translation.x, transform.translation.y)
+
+        player.entity_component.x = transform.translation.x;
+        player.entity_component.y = transform.translation.y;
     }
 
     if keyboard_input.pressed(KeyCode::Space){
 
         for (_, _, mut player ) in &mut query{
 
-            player.fire_speed.tick(time.delta());
+            player.entity_component.fire_speed.tick(time.delta());
 
-            if player.fire_speed.just_finished(){
-                spwan_projectil(&mut commands, &mut meshes, &mut materials, Vec3::new(player.x, player.y, 100.));
+            if player.entity_component.fire_speed.just_finished(){
+                spwan_projectil(&mut commands, &mut meshes, &mut materials, Vec3::new(player.entity_component.x, player.entity_component.y, 100.));
             }
 
         }

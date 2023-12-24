@@ -8,6 +8,10 @@ use crate::state::main_menu::MenuPlugin;
 use crate::state::paused::PausedMenuPlugin;
 use crate::state::states::{GameInitState, GameState};
 
+mod level {
+    pub mod level_manager;
+}
+
 mod background{
     pub mod nebuleuse;
     pub mod star;
@@ -17,6 +21,11 @@ mod entity {
     pub mod player_attack;
     pub mod player_capabilities;
 
+    pub mod entity;
+
+    mod enemy {
+        pub mod basic;
+    }
 }
 
 mod state {

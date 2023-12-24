@@ -8,21 +8,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26253656-efb3-4efb-8bb7-ccc49b5cb477" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/level/level_manager.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/level/lvl_data/level_1.ron" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/entity/enemy1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/enemy/basic.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/entity.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background/nebuleuse.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/nebuleuse.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/background/star.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/background/star.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/player.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/player.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/player_attack.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/player_attack.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/player_capabilities.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/player_capabilities.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/level/level_manager.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/level/level_manager.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/level/lvl_data/level_1.ron" beforeDir="false" afterPath="$PROJECT_DIR$/src/level/lvl_data/level_1.ron" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/states/game.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/game.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/states/main_menu.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/main_menu.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/states/menu_element.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/menu_element.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/states/paused.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/paused.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/states/screen.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/screen.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/states/states.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/states.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/game.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/game.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,19 +60,20 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/julien/workspace/rust/space_shooter/assets/background",
+    "last_opened_file_path": "/home/julien/workspace/rust/space_shooter/assets/entity",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/entity" />
       <recent name="$PROJECT_DIR$/assets/background" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -124,7 +120,7 @@
       <workItem from="1702715800304" duration="16690000" />
       <workItem from="1702745148074" duration="7837000" />
       <workItem from="1702808123856" duration="14534000" />
-      <workItem from="1703407301274" duration="1068000" />
+      <workItem from="1703407301274" duration="11094000" />
     </task>
     <servers />
   </component>
