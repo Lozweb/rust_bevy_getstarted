@@ -57,7 +57,7 @@ pub fn texture(
 }
 
 fn sprite_sheet_bundle<T>(
-    mut texture_atlases: &mut ResMut<Assets<TextureAtlas>>,
+    texture_atlases: &mut ResMut<Assets<TextureAtlas>>,
     asset_server: &mut Res<AssetServer>,
     texture_atlas_index: usize,
     screen: &ScreenResolution,

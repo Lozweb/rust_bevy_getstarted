@@ -8,10 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26253656-efb3-4efb-8bb7-ccc49b5cb477" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/background/background.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/enemy/basic.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/enemy/basic.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/entity.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/entity.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/player.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/player.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/state/game.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/game.rs" afterDir="false" />
     </list>
@@ -116,7 +117,7 @@
       <workItem from="1702715800304" duration="16690000" />
       <workItem from="1702745148074" duration="7837000" />
       <workItem from="1702808123856" duration="14534000" />
-      <workItem from="1703407301274" duration="14149000" />
+      <workItem from="1703407301274" duration="15206000" />
     </task>
     <servers />
   </component>

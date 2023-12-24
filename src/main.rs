@@ -3,6 +3,7 @@ use bevy::core_pipeline::tonemapping::Tonemapping;
 use bevy::prelude::*;
 use bevy::window::WindowTheme;
 use state::screen::get_current_screen_resolution;
+use crate::background::background::BackgroundPlugin;
 use crate::state::game::GamePlugin;
 use crate::state::main_menu::MenuPlugin;
 use crate::state::paused::PausedMenuPlugin;
@@ -15,6 +16,7 @@ mod level {
 mod background{
     pub mod nebuleuse;
     pub mod star;
+    pub mod background;
 }
 mod entity {
     pub mod player;
@@ -61,7 +63,7 @@ fn main() {
         .add_state::<GameState>()
         .add_state::<GameInitState>()
         .add_systems(Startup, setup)
-        .add_plugins((MenuPlugin, GamePlugin, PausedMenuPlugin))
+        .add_plugins((MenuPlugin, GamePlugin, BackgroundPlugin, PausedMenuPlugin))
         .run();
 }
 
